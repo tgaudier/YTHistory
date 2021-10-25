@@ -15,13 +15,30 @@ function dataparser (domText) {
 	let content_cells = dom.window.document.querySelectorAll('.mdl-grid')
 
 	for (i = 0; i < content_cells.length; i++) {
-		let n = ""
+		let channelName = ""
+		let videoId = ""
+		let watchDate = ""
+
 		try {
-			n = content_cells[i].querySelectorAll('a')[1].innerHTML
+			channelName = content_cells[i].querySelectorAll('a')[1].innerHTML
 		} catch (TypeError) {
-			console.log("No channel for element " + i)
+			//console.log("No channel for element " + i)
 		}
-		jsonData.push(n)
+
+		try {
+			videoId = content_cells[i].querySelectorAll('a')[0].getAttribute('href').split('=')[1]
+		} catch (TypeError) {
+			//console.log("No video for element " + i)
+		}
+
+		try {
+			watchDate = content_cells[i].lastChild.innerHTML
+			console.log(watchDate)
+		} catch (TypeError) {
+			console.log("No watch date for element " + i)
+		}
+
+		jsonData.push(channelName)
 	}
 
 	return jsonData

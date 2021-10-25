@@ -2,6 +2,8 @@ const express = require('express')
 const dataprocessor = require('./data-processor.js')
 const ejs = require('ejs')
 
+const api_key = require('./private/api-key.js')
+
 const app = express()
 const port = 8080
 
@@ -10,24 +12,6 @@ app.use(fileupload());
 
 app.use(express.static('public'))
 
-/*var data = fs.readFileSync('data/channels.csv')
-    .toString() // convert Buffer to string
-    .split('\n') // split string to lines
-    .map(e => e.trim()) // remove white spaces for each line
-
-dict = {}
-
-for (elt of data) {
-	if (typeof(dict[elt]) != "number") {
-		dict[elt] = 1
-	} else {
-		dict[elt]++
-	}
-}*/
-
-/*for (let [key, value] of Object.entries(dict)) {
-	console.log(`${key} appears ${value} times`)
-}*/
 
 app.post('/loadfile', (req, res) => {
 	console.log("Received file !")
